@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -7,11 +7,18 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor( public authService : AuthService) { }
+  constructor( private router: Router) { }
 
   canActivate(){//Debe retornar un booleano , una promesa o un obserbable
   
-    return this.authService.isAuth();
+    const autenticado = false;
+
+    if (autenticado === false) {
+      return this.router.navigate([ '/login' ]);
+    }
+
+    return false;
+
 
   }
 }

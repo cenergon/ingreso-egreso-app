@@ -5,6 +5,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.modulo';
 import { FormsModule } from '@angular/forms';
 
+//NGRX
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -26,8 +31,6 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +42,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent 
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,12 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    StoreModule.forRoot( appReducers ), //aca me pide el reducer,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
