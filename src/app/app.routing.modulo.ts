@@ -16,7 +16,7 @@ const routes: Routes = [
         children: dashBoardRoutes,
         canActivate: [ AuthGuardService ] //condiciones para entrar a las rutas
     },
-    { path: '**', pathMatch:'full', redirectTo: '' }
+    { path: '**', redirectTo: '' }
 ];
 
 

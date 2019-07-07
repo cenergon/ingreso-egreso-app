@@ -20,6 +20,10 @@ export function authReducer (state = estadoInicial, action: fromAuth.acciones ):
             return {
                 user: { ...action.user} //tomo cada propiedad del objeto user y hago pares de valores. De esta forma clono el objeto
             }
+        case fromAuth.UNSET_USER:
+            return{
+                user:null
+            }
       
         default:
             return state;

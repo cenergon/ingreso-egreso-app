@@ -7,17 +7,12 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor( private router: Router) { }
+  constructor( public authService : AuthService) { }
 
   canActivate(){//Debe retornar un booleano , una promesa o un obserbable
   
-    const autenticado = false;
-
-    if (autenticado === false) {
-      return this.router.navigate([ '/login' ]);
-    }
-
-    return false;
+   
+    return this.authService.isAuth();
 
 
   }
