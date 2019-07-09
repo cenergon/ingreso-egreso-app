@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, CanLoad } from '@angular/router';
 import { AuthService } from './auth.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate, CanLoad {
 
   constructor( public authService : AuthService) { }
 
@@ -15,5 +16,13 @@ export class AuthGuardService implements CanActivate {
     return this.authService.isAuth();
 
 
+  }
+
+
+  canLoad(){
+    return this.authService.isAuth()
+    .pipe(
+      take(1) // Dice cuantas notificaciones emite este obserbable antes de cancelar la notificacion
+    );
   }
 }

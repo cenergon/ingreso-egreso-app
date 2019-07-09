@@ -82,12 +82,11 @@ private ingresoEgresoItems(uid: string){
 }
 
 //Cuando cierro sesion, tengo que cancelar las subscripciones
+//purga todo la informacion cuando sago del sistema
 cancelarSubscriptions(){
   this.ingresoEgresoItemsSubscription.unsubscribe();
   this.ingresoEgresoListenerSubscription.unsubscribe();
   this.store.dispatch( new UnSetUserAction());
-
-
 }
 
 
